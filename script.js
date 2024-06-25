@@ -55,17 +55,91 @@
         }
    
 
-    // Function to render spell slots
+     // Function to render spell slots
     function renderSpellSlots() {
         spellSlots.innerHTML = '';
         for (const level in characterData.spellSlots) {
+            const slotsUsed = characterData.spellSlots[level];
             spellSlots.insertAdjacentHTML('beforeend', `
                 <div>
-                    <strong>Level ${level}:</strong> ${characterData.spellSlots[level]}
+                    <strong>Level ${level}:</strong> 
+                    <span id="slots-${level}">${slotsUsed}</span> /
+                    ${getMaxSlotsForLevel(level)} <!-- Add max spell slots for this level -->
+                    <button class="increment" data-level="${level}">+</button>
+                    <button class="decrement" data-level="${level}">-</button>
                 </div>
             `);
         }
+        // Add event listeners for increment and decrement buttons
+        document.querySelectorAll('.increment').forEach(button => {
+            button.addEventListener('click', function() {
+                const level = this.getAttribute('data-level');
+                incrementSpellSlots(level);
+            });
+        });
+        document.querySelectorAll('.decrement').forEach(button => {
+            button.addEventListener('click', function() {
+                const level = this.getAttribute('data-level');
+                decrementSpellSlots(level);
+            });
+        });
     }
+
+    // Function to increment spell slots for a specific level
+    function incrementSpellSlots(level) {
+        characterData.spellSlots[level]++;
+        renderSpellSlots(); // Update the display
+    }
+
+    // Function to decrement spell slots for a specific level
+    function decrementSpellSlots(level) {
+        if (characterData.spellSlots[level] > 0) {
+            characterData.spellSlots[level]--;
+            renderSpellSlots(); // Update the display
+        }
+    }
+
+    // Function to get maximum spell slots for a given level (customize this based on your D&D rules)
+    function getMaxSlotsForLevel(level) {
+        // max level slots per spell level
+        switch (level) {
+            case '1':
+                return 4;
+            case '2':
+                return 3;
+            case '3':
+                return 3;
+            case '4':
+                return 3;
+            case '5':
+                return 3;
+            case '6':
+                return 2;
+            case '7':
+                return 2;
+            case '8':
+                return 1;
+            case '9':
+                return 1;
+            default:
+                return 0;
+        }
+    }
+
+    // Event listener for save button
+    saveButton.addEventListener('click', function() {
+        // Save character data to local storage
+        localStorage.setItem('characterData', JSON.stringify(characterData));
+    });
+
+    // Event listener for reset button
+    resetButton.addEventListener('click', function() {
+        // Reset character data
+        characterData = {};
+        localStorage.removeItem('characterData');
+        spellSlots.innerHTML = '';
+    });
+});
 
     // Event listener for save button
     saveButton.addEventListener('click', function() {
