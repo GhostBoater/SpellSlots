@@ -132,7 +132,7 @@
         function updateFileOnGitHub(newData, path, sha) {
             const owner = 'GhostBoater';
             const repo = 'SpellSlots';
-            const token = 'your_personal_access_token';
+            const token = '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';
         
             const content = btoa(JSON.stringify(newData)); // Convert data to base64
         
