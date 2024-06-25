@@ -166,7 +166,7 @@
             // Save character data to local storage
             localStorage.setItem('characterData', JSON.stringify(characterData));
             // Call function to update file on GitHub
-            updateFileOnGitHub(characterData, 'userdata.json', 'SHA_of_existing_file');
+            updateFileOnGitHub(characterData, 'userdata.json', '2d3dfd856742c8521049ecf71654c7e1bb4888f3');
         });
 
     // Event listener for reset button
