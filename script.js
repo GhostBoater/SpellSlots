@@ -16,11 +16,21 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
         const characterName = document.getElementById('character-name').value;
         const password = document.getElementById('password').value;
-        // Perform authentication here (not implemented in this example)
-        // For simplicity, let's assume authentication is successful
-        characterData = characterData[characterName] || { spellSlots: {} };
-        renderSpellSlots();
+        // Authenticate user
+        if (authenticate(characterName, password)) {
+            characterData = characterData[characterName] || { spellSlots: {} };
+            renderSpellSlots();
+        } else {
+            alert('Invalid character name or password.');
+        }
     });
+
+    // Function to authenticate user
+    function authenticate(characterName, password) {
+        // Implement authentication logic here
+        // For simplicity, let's assume authentication is successful if character name and password match
+        return characterName === 'example' && password === 'password123';
+    }
 
     // Function to render spell slots
     function renderSpellSlots() {
