@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('login-form');
     const spellSlots = document.getElementById('spell-slots');
     const saveButton = document.getElementById('save');
@@ -25,33 +25,33 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-// Function to authenticate user
-function authenticate(characterName, password) {
-    console.log('Authenticating user:', characterName);
-    // Fetch user data from JSON file
-    return fetch('./userdata.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to fetch user data');
-            }
-            return response.json();
-        })
-        .then(userData => {
-            console.log('User data loaded:', userData);
-            // Check if user exists and password matches
-            if (userData[characterName] && userData[characterName].password === password) {
-                console.log('Authentication successful for:', characterName);
-                return true;
-            } else {
-                console.log('Authentication failed for:', characterName);
+    // Function to authenticate user
+    function authenticate(characterName, password) {
+        console.log('Authenticating user:', characterName);
+        // Fetch user data from JSON file
+        return fetch('./userdata.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch user data');
+                }
+                return response.json();
+            })
+            .then(userData => {
+                console.log('User data loaded:', userData);
+                // Check if user exists and password matches
+                if (userData[characterName] && userData[characterName].password === password) {
+                    console.log('Authentication successful for:', characterName);
+                    return true;
+                } else {
+                    console.log('Authentication failed for:', characterName);
+                    return false;
+                }
+            })
+            .catch(error => {
+                console.error('Error loading user data:', error);
                 return false;
-            }
-        })
-        .catch(error => {
-            console.error('Error loading user data:', error);
-            return false;
-        });
-}
+            });
+    }
 
     // Function to render spell slots
     function renderSpellSlots() {
