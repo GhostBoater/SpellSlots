@@ -16,6 +16,7 @@
         event.preventDefault();
         const characterName = document.getElementById('character-name').value;
         const password = document.getElementById('password').value;
+        
         // Authenticate user
         if (authenticate(characterName, password)) {
             characterData = characterData[characterName] || { spellSlots: {} };
@@ -24,6 +25,7 @@
             alert('Invalid character name or password.');
         }
     });
+        
     // Function to authenticate user
         function authenticate(characterName, password) {
             console.log('Authenticating user:', characterName);
@@ -55,16 +57,16 @@
         }
    
 
-    // Function to render spell slots
+     // Function to render spell slots
     function renderSpellSlots() {
         spellSlots.innerHTML = '';
         for (const level in characterData.spellSlots) {
             const slotsUsed = characterData.spellSlots[level];
-            const maxSlots = getMaxSlotsForLevel(level);
             spellSlots.insertAdjacentHTML('beforeend', `
                 <div>
                     <strong>Level ${level}:</strong> 
-                    <span id="slots-${level}">${slotsUsed} / ${maxSlots}</span>
+                    <span id="slots-${level}">${slotsUsed}</span> /
+                    ${getMaxSlotsForLevel(level)} <!-- Add max spell slots for this level -->
                     <button class="increment" data-level="${level}">+</button>
                     <button class="decrement" data-level="${level}">-</button>
                 </div>
@@ -141,17 +143,3 @@
     });
 });
 
-    // Event listener for save button
-    saveButton.addEventListener('click', function() {
-        // Save character data to local storage
-        localStorage.setItem('characterData', JSON.stringify(characterData));
-    });
-
-    // Event listener for reset button
-    resetButton.addEventListener('click', function() {
-        // Reset character data
-        characterData = {};
-        localStorage.removeItem('characterData');
-        spellSlots.innerHTML = '';
-    });
-});
