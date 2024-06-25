@@ -55,16 +55,16 @@
         }
    
 
-     // Function to render spell slots
+    // Function to render spell slots
     function renderSpellSlots() {
         spellSlots.innerHTML = '';
         for (const level in characterData.spellSlots) {
             const slotsUsed = characterData.spellSlots[level];
+            const maxSlots = getMaxSlotsForLevel(level);
             spellSlots.insertAdjacentHTML('beforeend', `
                 <div>
                     <strong>Level ${level}:</strong> 
-                    <span id="slots-${level}">${slotsUsed}</span> /
-                    ${getMaxSlotsForLevel(level)} <!-- Add max spell slots for this level -->
+                    <span id="slots-${level}">${slotsUsed} / ${maxSlots}</span>
                     <button class="increment" data-level="${level}">+</button>
                     <button class="decrement" data-level="${level}">-</button>
                 </div>
