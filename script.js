@@ -25,12 +25,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Function to authenticate user
-    function authenticate(characterName, password) {
-        // Implement authentication logic here
-        // For simplicity, let's assume authentication is successful if character name and password match
-        return characterName === 'example' && password === 'password123';
-    }
+   // Function to authenticate user
+function authenticate(characterName, password) {
+    // Read user data from file
+    const userData = require('./userdata.json');
+    // Check if user exists and password matches
+    return userData[characterName] && userData[characterName].password === password;
+}
 
     // Function to render spell slots
     function renderSpellSlots() {
