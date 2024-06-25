@@ -129,10 +129,12 @@
     }
 
     // Event listener for save button
-    saveButton.addEventListener('click', function() {
-        // Save character data to local storage
-        localStorage.setItem('characterData', JSON.stringify(characterData));
-    });
+        saveButton.addEventListener('click', function() {
+            // Save character data to local storage
+            localStorage.setItem('characterData', JSON.stringify(characterData));
+            // Call function to update file on GitHub
+            updateFileOnGitHub(characterData, 'userdata.json', 'SHA_of_existing_file');
+        });
 
     // Event listener for reset button
     resetButton.addEventListener('click', function() {
