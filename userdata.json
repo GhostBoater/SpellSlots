@@ -13,4 +13,11 @@
             "9": 1
         }
     }
+
+    "Zac":{
+        "password" : "pass",
+        "spellSlots": {
+            "1": 3,    
+        }        
+    }
 }
